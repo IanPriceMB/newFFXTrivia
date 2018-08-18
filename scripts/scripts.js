@@ -21,6 +21,10 @@ $(document).ready(function() {
     // a global tracker for the currently selected level
     let levelChoice;
 
+    //a global timer for the questions
+    let intervalId;
+    let timerStart;
+
     // when you click on the main start button on the home screen clear the screen and 
     // show the difficulty choices
     $(".main-startBtn").on('click', function(event){
@@ -38,7 +42,7 @@ $(document).ready(function() {
     // creating the difficulty screen 
     function difficultyChoice(){
         $(".main").empty();
-        // $(".timer").empty();
+        $(".timer").remove();
         for (let i = 0; i < levelNames.length; i++){
            const difficultyBtn = $("<div class='difficultyBtn' >");
            let name = levelNames[i].replace(/ /g, '');
@@ -118,16 +122,13 @@ $(document).ready(function() {
     };
     //add the right answers to the right divs hey hey
     function populate(difficulty){
-        console.log(difficulty)
         let question = Questions[difficulty][questionTracker]
-        console.log(question)
         //empty out each of the divs for the next set of questin and answers
         $(".question").empty();
         $(".answerNumber").empty();
         $(".answer").empty();
         $(".timer").empty();
         $(".question").text(question.question);
-        // run();
 
         for (var i = 0; i < question.answers.length; i++){
             // appending the proper answer number and answer to the div
@@ -139,5 +140,69 @@ $(document).ready(function() {
             $("#ansNumber" + i).addClass("answer" + question.answers[i].value);
             $("#answer" + i).addClass("answerL" + question.answers[i].value);
         }
+
+        runTimer(difficulty);
     };
+
+    //a simple timer for each question
+    function runTimer(difficulty) {
+        timerStart = 3;
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000, difficulty);
+    };
+
+    //make the timer count down and also update live on screen
+    function decrement(levelChoice) {
+
+        timerStart--;
+        $(".timer").html("<h3>Timer: " + timerStart + "</h3>");
+        if (timerStart == 0) {
+            //if out of time stop the timer
+            stop();
+
+            //update the question tracker so that we get to the next question
+            questionTracker++;
+
+            //reset the boss count for current level to 0 for wrong question
+            if(levelChoice == 'Besaid'){
+                BesaidCount = 0;
+            }
+            if(levelChoice == 'Luca'){
+                LucaCount = 0;
+            }
+            if(levelChoice == 'Djose'){
+                DjoseCount = 0;
+            }
+            if(levelChoice == 'ThunderPlains'){
+               ThunderPlainsCount = 0;
+            }
+            else if(levelChoice == 'Gagazet'){
+                GagazetCount = 0;
+            }
+
+            //if player fails to answer the final question on the boss level 
+            //tell the player that they have lost
+            if(questionTracker == Questions[levelChoice].length && levelChoice == 'Sin'){  
+                $(".main").empty();
+                var youLose = $("<div class='player-lost'>")
+                $(".main").append(youLose);
+                $(".player-lost").text('YOU LOST!');
+            }
+            //if player fails last question in the set by timer
+            //send player to the difficulty screen
+            else if (questionTracker == Questions[levelChoice].length){
+                difficultyChoice();
+            }
+            //if player fails by timer and it is not the last question
+            //set next question
+            else {
+                populate(levelChoice);
+            }
+        }
+    }; 
+
+    //stop the timer
+    function stop() {
+        clearInterval(intervalId);
+      }
 });
