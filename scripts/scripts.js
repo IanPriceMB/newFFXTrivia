@@ -15,6 +15,12 @@ $(document).ready(function() {
     let GagazetCount;
     let SinCount;
 
+    // a global tracker for which question you are on given each difficulty
+    let questionTracker;
+
+    // a global tracker for the currently selected level
+    let levelChoice;
+
     // when you click on the main start button on the home screen clear the screen and 
     // show the difficulty choices
     $(".main-startBtn").on('click', function(event){
@@ -42,29 +48,30 @@ $(document).ready(function() {
            difficultyBtn.attr("data-level", name);
         }
     //this will hide buttons if we get enough points in a particular catagory the sequential times around
-        if(BesaidCount == Questions['Besaid'].length){
+        if(BesaidCount >= Questions['Besaid'].length){
             $("#Besaid").attr("class", "hidden");
         }
-        if(LucaCount == Questions['Luca'].length){
+        if(LucaCount >= Questions['Luca'].length){
             $("#Luca").attr("class", "hidden");
         }
-        if(DjoseCount == Questions['Djose'].length){
+        if(DjoseCount >= Questions['Djose'].length){
             $("#Djose").attr("class", "hidden");
         }
-        if(ThunderPlainsCount == Questions['ThunderPlains'].length){
+        if(ThunderPlainsCount >= Questions['ThunderPlains'].length){
             $("#ThunderPlains").attr("class", "hidden");
         }
-        if(GagazetCount == Questions['Gagazet'].length){
+        if(GagazetCount >= Questions['Gagazet'].length){
             $("#Gagazet").attr("class", "hidden");
         }
     }
     
     // this is what fires when you select a difficulty
-    $(".difficultyBtn").on("click", function(){
+    $('body').on("click", '.difficultyBtn', function(){
         levelChoice = $(this).attr("data-level");
-        // questionTracker=0;
-        gameStart();
-        populate();
+        questionTracker=0;
+        gameStart(levelChoice);
+        populate(levelChoice);
+
         // this section ensures that the boss level will only trigger if all the other levels have been beaten
         if(levelChoice == 'Besaid'){
             BesaidCount = 0;
@@ -86,23 +93,51 @@ $(document).ready(function() {
         }
     });
     //make the divs and such to hold all our questions and answers
-    function gameStart(){
-        $(".theBigOne").empty();
-        $(".theBigOne").append("<div class='question'>");
+    function gameStart(difficulty){
+        //clear the main div for questions and answers
+        $(".main").empty();
+
+        //append the question field and the timer
+        $(".main").append("<div class='question'>");
         $("body").append("<div class='timer'>");  
-        for (var i = 0; i < Questions[difficulty][j].answers.length; i++){
-            var newRow = $("<row>");
+
+        //dynamically append the divs for the answers to the main div
+        for (let i = 0; i < Questions[difficulty][questionTracker].answers.length; i++){
+            const newRow = $("<row>");
             newRow.attr("id", "row" + i);
-            newRow.attr("class", "clearfix");
-            $(".theBigOne").append(newRow);
-            var ansDiv = $("<div>");
-            var ansLDiv = $("<div>");
-            ansDiv.attr("id", "ans" + i);
-            ansDiv.attr("class", "ans");
-            ansLDiv.attr("id", "ansL" + i);
-            ansLDiv.attr("class", "ansLo"); 
-            $("#row" + i).append(ansDiv);
-            $("#row" + i).append(ansLDiv);
+            $(".main").append(newRow);
+            
+            const answerNumber = $("<div class='answerNumber'>");
+            answerNumber.attr("id", "answerNumber" + i);
+            const answer = $("<div class='answer'>");
+            answer.attr("id", "answer" + i);
+
+            $("#row" + i).append(answerNumber);
+            $("#row" + i).append(answer);
         }
-    }
+    };
+    //add the right answers to the right divs hey hey
+    function populate(difficulty){
+        console.log(difficulty)
+        let question = Questions[difficulty][questionTracker]
+        console.log(question)
+        //empty out each of the divs for the next set of questin and answers
+        $(".question").empty();
+        $(".answerNumber").empty();
+        $(".answer").empty();
+        $(".timer").empty();
+        $(".question").text(question.question);
+        // run();
+
+        for (var i = 0; i < question.answers.length; i++){
+            // appending the proper answer number and answer to the div
+            $("#answerNumber" + i).text(i + 1);
+            $("#answer" + i).text(question.answers[i].a);
+            $("#answer" + i).attr("data-value", question.answers[i].value)
+
+            // this is for adding the green and red if they answer wrong 
+            $("#ansNumber" + i).addClass("answer" + question.answers[i].value);
+            $("#answer" + i).addClass("answerL" + question.answers[i].value);
+        }
+    };
 });
