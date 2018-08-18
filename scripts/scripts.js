@@ -15,11 +15,11 @@ $(document).ready(function() {
     let GagazetCount;
     let SinCount;
 
-    // a global tracker for which question you are on given each difficulty
-    let questionTracker;
-
     // a global tracker for the currently selected level
     let levelChoice;
+
+    // a global tracker for which question you are on given each difficulty
+    let questionTracker;
 
     //a global timer for the questions
     let intervalId;
@@ -39,10 +39,14 @@ $(document).ready(function() {
     function volume() {
         document.getElementById('music-player').volume = .05;
     }
+    
     // creating the difficulty screen 
     function difficultyChoice(){
+        //clear main and remove timer div
         $(".main").empty();
         $(".timer").remove();
+
+        //create buttons for the difficulty level and assign them stuff
         for (let i = 0; i < levelNames.length; i++){
            const difficultyBtn = $("<div class='difficultyBtn' >");
            let name = levelNames[i].replace(/ /g, '');
@@ -96,6 +100,7 @@ $(document).ready(function() {
             SinCount = 0;
         }
     });
+    
     //make the divs and such to hold all our questions and answers
     function gameStart(difficulty){
         //clear the main div for questions and answers
@@ -107,9 +112,12 @@ $(document).ready(function() {
 
         //dynamically append the divs for the answers to the main div
         for (let i = 0; i < Questions[difficulty][questionTracker].answers.length; i++){
-            const newRow = $("<row>");
-            newRow.attr("id", "row" + i);
-            $(".main").append(newRow);
+            
+            const row = $("<row class='answer-choice'>");
+            row.attr("id", "row" + i);
+            row.attr("data-level", difficulty);
+            
+            $(".main").append(row);
             
             const answerNumber = $("<div class='answerNumber'>");
             answerNumber.attr("id", "answerNumber" + i);
@@ -120,21 +128,22 @@ $(document).ready(function() {
             $("#row" + i).append(answer);
         }
     };
-    //add the right answers to the right divs hey hey
+    
+    //add the right question and answers to the right divs hey hey
     function populate(difficulty){
         let question = Questions[difficulty][questionTracker]
         //empty out each of the divs for the next set of questin and answers
         $(".question").empty();
         $(".answerNumber").empty();
         $(".answer").empty();
-        $(".timer").empty();
+        $(".timer").html("<h3>Timer: 20</h3>");
         $(".question").text(question.question);
 
         for (var i = 0; i < question.answers.length; i++){
             // appending the proper answer number and answer to the div
             $("#answerNumber" + i).text(i + 1);
             $("#answer" + i).text(question.answers[i].a);
-            $("#answer" + i).attr("data-value", question.answers[i].value)
+            $("#row" + i).attr("data-value", question.answers[i].value)
 
             // this is for adding the green and red if they answer wrong 
             $("#ansNumber" + i).addClass("answer" + question.answers[i].value);
@@ -146,7 +155,7 @@ $(document).ready(function() {
 
     //a simple timer for each question
     function runTimer(difficulty) {
-        timerStart = 3;
+        timerStart = 20;
         clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000, difficulty);
     };
@@ -205,4 +214,84 @@ $(document).ready(function() {
     function stop() {
         clearInterval(intervalId);
       }
+
+    //on click of an answer option
+    $('body').on('click', '.answer-choice', function(){
+        //stop the tiemer and update the question trcker
+        stop();
+        questionTracker++;
+
+        //the anser the player selected
+        answer = $(this).attr('data-value');
+        level = $(this).attr('data-level');
+
+        //if the answer is true
+        if(answer == 1){
+            //update teh score counts for the boss round
+            if (level == 'Besaid'){
+                BesaidCount++;
+            }
+            if (level == 'Luca'){
+                LucaCount++;
+            }
+            if (level == 'Djose'){
+                DjoseCount++;
+            }
+            if (level == 'ThunderPlains'){
+                ThunderPlainsCount++;
+            }
+            if (level == 'Gagazet'){
+                GagazetCount++;
+            }
+            else if (level == 'Sin'){
+                SinCount++;
+            }
+
+            //if all this is true boss round
+            if(questionTracker == Questions[level].length && 
+                BesaidCount == Questions['Besaid'].length &&
+                LucaCount == Questions['Luca'].length &&
+                DjoseCount == Questions['Djose'].length &&
+                ThunderPlainsCount == Questions['ThunderPlains'].length &&
+                GagazetCount == Questions['Gagazet'].length){
+                    //remove the color classes
+
+                    //remove the value classes
+
+                    //boss round
+
+                    //reset all counts
+            }
+            else if(questionTracker = Questions[level].length && level == 'Sin' && SinCount == Questions[level].length){
+                //player victory screen
+                $(".main").empty();
+                var youWin = $("<div class='player-wins'>")
+                $(".main").append(youWin);
+                $(".player-wins").text('YOU WON!');
+            }
+            else if(questionTracker ==  Questions[level].length){
+                //remove the color classes
+                
+                //remove the valuse classes
+
+                //return the player to the difficulty screen
+            }
+            else {
+                //remove the color classes
+                
+                //remove the valuse classes
+
+                //next question
+
+            }
+        } else if (answer == 0){
+            //add color classes
+
+            //update question tracker
+
+            //reset level count for wrong answer
+
+            //timeout function so that the colors show answer for a bit
+        }
+    });
 });
