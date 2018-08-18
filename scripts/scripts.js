@@ -131,7 +131,10 @@ $(document).ready(function() {
     
     //add the right question and answers to the right divs hey hey
     function populate(difficulty){
+
+        //just a time saver
         let question = Questions[difficulty][questionTracker]
+        
         //empty out each of the divs for the next set of questin and answers
         $(".question").empty();
         $(".answerNumber").empty();
@@ -139,6 +142,7 @@ $(document).ready(function() {
         $(".timer").html("<h3>Timer: 20</h3>");
         $(".question").text(question.question);
 
+        //populate the screen witht the quesiton and answers
         for (var i = 0; i < question.answers.length; i++){
             // appending the proper answer number and answer to the div
             $("#answerNumber" + i).text(i + 1);
@@ -150,6 +154,7 @@ $(document).ready(function() {
             $("#answer" + i).addClass("answerL" + question.answers[i].value);
         }
 
+        //start the answer timer
         runTimer(difficulty);
     };
 
@@ -191,11 +196,8 @@ $(document).ready(function() {
 
             //if player fails to answer the final question on the boss level 
             //tell the player that they have lost
-            if(questionTracker == Questions[levelChoice].length && levelChoice == 'Sin'){  
-                $(".main").empty();
-                var youLose = $("<div class='player-lost'>")
-                $(".main").append(youLose);
-                $(".player-lost").text('YOU LOST!');
+            if(questionTracker == Questions[levelChoice].length && levelChoice == 'Sin'){ 
+                loseScreen(); 
             }
             //if player fails last question in the set by timer
             //send player to the difficulty screen
@@ -221,13 +223,16 @@ $(document).ready(function() {
         stop();
         questionTracker++;
 
-        //the anser the player selected
+        //the answer the player selected
         answer = $(this).attr('data-value');
         level = $(this).attr('data-level');
 
+        //just to save time
+        totalAnswers = Questions[level].length;
+
         //if the answer is true
         if(answer == 1){
-            //update teh score counts for the boss round
+            //update the score counts for the boss round
             if (level == 'Besaid'){
                 BesaidCount++;
             }
@@ -248,50 +253,124 @@ $(document).ready(function() {
             }
 
             //if all this is true boss round
-            if(questionTracker == Questions[level].length && 
+            if(questionTracker == totalAnswers && 
                 BesaidCount == Questions['Besaid'].length &&
                 LucaCount == Questions['Luca'].length &&
                 DjoseCount == Questions['Djose'].length &&
                 ThunderPlainsCount == Questions['ThunderPlains'].length &&
                 GagazetCount == Questions['Gagazet'].length){
                     //remove the color classes
-
+                    colorClasses('off');
                     //remove the value classes
-
+                    valueClasses();
                     //boss round
-
+                    populate('Sin');
                     //reset all counts
+                    BesaidCount, LucaCount, DjoseCount, ThunderPlainsCount, GagazetCount = 0;
             }
-            else if(questionTracker = Questions[level].length && level == 'Sin' && SinCount == Questions[level].length){
+            //if victorious against sin show player the victory screen
+            else if(questionTracker = totalAnswers && level == 'Sin' && SinCount == totalAnswers){
                 //player victory screen
                 $(".main").empty();
                 var youWin = $("<div class='player-wins'>")
                 $(".main").append(youWin);
                 $(".player-wins").text('YOU WON!');
             }
-            else if(questionTracker ==  Questions[level].length){
+            //if not on boss level but finished all questions
+            else if(questionTracker ==  totalAnswers){
                 //remove the color classes
-                
+                colorClasses('off');
                 //remove the valuse classes
-
+                valueClasses();
                 //return the player to the difficulty screen
+                difficultyChoice();
             }
+            //if not boss level put up next question
             else {
                 //remove the color classes
-                
+                colorClasses('off')
                 //remove the valuse classes
-
+                valueClasses();
                 //next question
-
+                populate();
             }
-        } else if (answer == 0){
+        } 
+        
+        //if the answer is false
+        else if (answer == 0){
             //add color classes
-
-            //update question tracker
-
+            colorClasses('on')
             //reset level count for wrong answer
+            if (level == 'Besaid'){
+                BesaidCount=0;
+            }
+            if (level == 'Luca'){
+                LucaCount=0;
+            }
+            if (level == 'Djose'){
+                DjoseCount=0;
+            }
+            if (level == 'ThunderPlains'){
+                ThunderPlainsCount=0;
+            }
+            if (level == 'Gagazet'){
+                GagazetCount=0;
+            }
+            
+            //if last boss question is failed show lose screen
+            if(questionTracker == totalAnswers && level == 'Sin'){  
+                loseScreen();
+            }
 
             //timeout function so that the colors show answer for a bit
+            setTimeout(function(){
+                //if last question and not boss level show color classes for 2 secons before
+                //moving to next question or back to difficulty screen
+                if (questionTracker == totalAnswers){
+                    colorClasses('off');
+                    valueClasses();  
+                    difficultyChoice();
+                } 
+                else {
+                    colorClasses('off');
+                    valueClasses();   
+                    populate();
+                }  
+                }, 2000);
         }
     });
+
+    //for adding or taking away color classes from answers
+    function colorClasses(position){
+        let state = position;
+
+        //add color to indicate the correct answer if the player guesses wrong
+        //also for removeing the classes prior to new question so that the colors
+        //dont remain on the worng answers
+        if (state == 'on'){
+            $('#answer1').addClass("right")
+            $('#answer0').addClass("wrong")
+            $('#answerNumber1').addClass("right")
+            $('#answerNumber0').addClass("wrong")
+        } 
+        else if (state == 'off'){
+            $('#answer1').removeClass("right")
+            $('#answer0').removeClass("wrong")
+            $('#answerNumber1').removeClass("right")
+            $('#answerNumber0').removeClass("wrong")
+        }
+    }
+    
+    //take away the answer value so that they dont override question to question
+    function valueClasses(){
+        $('.answer-choice').removeAttr('data-level');
+    }
+    
+    //creating the lose screen for the player
+    function loseScreen(){
+        $(".main").empty();
+        var youLose = $("<div class='player-lost'>")
+        $(".main").append(youLose);
+        $(".player-lost").text('YOU LOST!');
+    };
 });
