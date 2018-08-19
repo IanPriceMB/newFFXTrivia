@@ -24,7 +24,20 @@ $(document).ready(function() {
     //a global timer for the questions
     let intervalId;
     let timerStart;
+    
+    //this let's us control the music that is playing during each section
+    function musicPlayer(track){
+        $('#music-source').removeAttr('src');
+        $('#music-source').attr('src', 'music/'+track+'.mp3');
+        document.getElementById('music-player').play();
+        volume();
+    };
 
+    // making sure the music volume isn't too loud
+    function volume() {
+        document.getElementById('music-player').volume = .05;
+    };
+    
     //start the game on click
     $(".main-startBtn").on('click', function(event){
         event.preventDefault();
@@ -33,11 +46,6 @@ $(document).ready(function() {
         volume();
         difficultyChoice();
     })
-    
-    // making sure the music volume isn't too loud
-    function volume() {
-        document.getElementById('music-player').volume = .05;
-    }
     
     //difficulty selection screen
     function difficultyChoice(){
@@ -162,7 +170,7 @@ $(document).ready(function() {
         $(".question").text(question.question);
 
         //populate the screen witht the quesiton and answers
-        for (var i = 0; i < question.answers.length; i++){
+        for (let i = 0; i < question.answers.length; i++){
             // appending the proper answer number and answer to the div
             $("#answerNumber" + i).text(i + 1);
             $("#answer" + i).text(question.answers[i].a);
@@ -279,7 +287,7 @@ $(document).ready(function() {
                 //player victory screen
                 $(".timer").remove()
                 $(".main").empty();
-                var youWin = $("<div class='player-wins'>")
+                let youWin = $("<div class='player-wins'>")
                 $(".main").append(youWin);
                 $(".player-wins").text('YOU WON!');
             }
@@ -377,7 +385,7 @@ $(document).ready(function() {
     function loseScreen(){
         $(".timer").remove()
         $(".main").empty();
-        var youLose = $("<div class='player-lost'>")
+        let youLose = $("<div class='player-lost'>")
         $(".main").append(youLose);
         $(".player-lost").text('YOU LOST!');
     };
