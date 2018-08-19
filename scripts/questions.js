@@ -2,13 +2,13 @@ var Questions = {
     //Besaid / very easy questions
     Besaid: [
         {
-        question: "Who is the main character of Final Fantasy X?",
-        answers: [
-            {a : "Teedus", value : 0},
-            {a : "Tyedus", value : 0},
-            {a : "Tidus", value : 1},
-            {a : "Tidos", value : 0}
-        ]
+            question: "Who is the main character of Final Fantasy X?",
+            answers: [
+                {a : "Teedus", value : 0},
+                {a : "Tyedus", value : 0},
+                {a : "Tidus", value : 1},
+                {a : "Tidos", value : 0}
+            ]
         },
         {
             question: "What does the character Wakka use for a weapon?",
@@ -31,14 +31,14 @@ var Questions = {
     ],
         //Luca / easy questions
         Luca: [
-            {
-            question: "What is Tidus' home city called?",
-            answers: [
-                {a : "Zanarkand", value : 1},
-                {a : "Besaid", value : 0},
-                {a : "Baaj", value : 0},
-                {a : "Mt. Gagazet", value : 0}
-            ]
+                {
+                question: "What is Tidus' home city called?",
+                answers: [
+                    {a : "Zanarkand", value : 1},
+                    {a : "Besaid", value : 0},
+                    {a : "Baaj", value : 0},
+                    {a : "Mt. Gagazet", value : 0}
+                ]
             },
             {
                 question: "What race is the character Kimahri?",
@@ -131,13 +131,13 @@ var Questions = {
     //Gagazet / expert questions
         Gagazet: [
             {
-            question: "What is Noy Guado's player salary?",
-            answers: [
-                {a : "500 gil per game", value : 0},
-                {a : "80 gil per game", value : 1},
-                {a : "320 gil per game", value : 0},
-                {a : "380 gil per game", value : 0}
-            ]
+                question: "What is Noy Guado's player salary?",
+                answers: [
+                    {a : "500 gil per game", value : 0},
+                    {a : "80 gil per game", value : 1},
+                    {a : "320 gil per game", value : 0},
+                    {a : "380 gil per game", value : 0}
+                ]
             },
             {
                 question: "Which blitzball character has the most SH in the League at level 99?",

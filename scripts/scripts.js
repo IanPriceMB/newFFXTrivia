@@ -25,8 +25,7 @@ $(document).ready(function() {
     let intervalId;
     let timerStart;
 
-    // when you click on the main start button on the home screen clear the screen and 
-    // show the difficulty choices
+    //start the game on click
     $(".main-startBtn").on('click', function(event){
         event.preventDefault();
         $(".main").empty();
@@ -40,43 +39,66 @@ $(document).ready(function() {
         document.getElementById('music-player').volume = .05;
     }
     
-    // creating the difficulty screen 
+    //difficulty selection screen
     function difficultyChoice(){
         //clear main and remove timer div
         $(".main").empty();
         $(".timer").remove();
 
-        //create buttons for the difficulty level and assign them stuff
-        for (let i = 0; i < levelNames.length; i++){
-           const difficultyBtn = $("<div class='difficultyBtn' >");
-           let name = levelNames[i].replace(/ /g, '');
-           difficultyBtn.attr("id", name);
-           $(".main").append(difficultyBtn);
-           $("#" + name).append("<h2>" + levelNames[i] + "</h2><p>" + difficultyLevel[i] + "</p>");
-           difficultyBtn.attr("data-level", name);
+        //this allows for replayability by only reseting boss when difficulty is called
+        //as it only needs to be 0 before and every other time doesn't matter
+        SinCount = 0;
+
+        //if all this is true boss round
+        if(BesaidCount == Questions['Besaid'].length &&
+        LucaCount == Questions['Luca'].length &&
+        DjoseCount == Questions['Djose'].length &&
+        ThunderPlainsCount == Questions['ThunderPlains'].length &&
+        GagazetCount == Questions['Gagazet'].length){
+            questionTracker=0;
+            //bossround boiz
+            gameStart('Sin');
+            //boss round
+            populate('Sin');
+            //reset all counts
+            BesaidCount, LucaCount, DjoseCount, ThunderPlainsCount, GagazetCount = 0;
         }
-    //this will hide buttons if we get enough points in a particular catagory the sequential times around
-        if(BesaidCount >= Questions['Besaid'].length){
-            $("#Besaid").attr("class", "hidden");
+
+        //else must be a normal trip to the select screen
+        else {
+            //create buttons for the difficulty level and assign them stuff
+            for (let i = 0; i < levelNames.length; i++){
+                const difficultyBtn = $("<div class='difficultyBtn' >");
+                let name = levelNames[i].replace(/ /g, '');
+                difficultyBtn.attr("id", name);
+                $(".main").append(difficultyBtn);
+                $("#" + name).append("<h2>" + levelNames[i] + "</h2><p>" + difficultyLevel[i] + "</p>");
+                difficultyBtn.attr("data-level", name);
+            };
+            //this will hide buttons if we get enough points in a particular catagory the sequential times around
+            if(BesaidCount == Questions['Besaid'].length){
+                $("#Besaid").attr("class", "hidden");
+            }
+            if(LucaCount == Questions['Luca'].length){
+                $("#Luca").attr("class", "hidden");
+            }
+            if(DjoseCount == Questions['Djose'].length){
+                $("#Djose").attr("class", "hidden");
+            }
+            if(ThunderPlainsCount == Questions['ThunderPlains'].length){
+                $("#ThunderPlains").attr("class", "hidden");
+            }
+            if(GagazetCount == Questions['Gagazet'].length){
+                $("#Gagazet").attr("class", "hidden");
+            }
         }
-        if(LucaCount >= Questions['Luca'].length){
-            $("#Luca").attr("class", "hidden");
-        }
-        if(DjoseCount >= Questions['Djose'].length){
-            $("#Djose").attr("class", "hidden");
-        }
-        if(ThunderPlainsCount >= Questions['ThunderPlains'].length){
-            $("#ThunderPlains").attr("class", "hidden");
-        }
-        if(GagazetCount >= Questions['Gagazet'].length){
-            $("#Gagazet").attr("class", "hidden");
-        }
-    }
+    };
     
-    // this is what fires when you select a difficulty
+    //select your difficulty
     $('body').on("click", '.difficultyBtn', function(){
         levelChoice = $(this).attr("data-level");
         questionTracker=0;
+
         gameStart(levelChoice);
         populate(levelChoice);
 
@@ -91,17 +113,14 @@ $(document).ready(function() {
             DjoseCount = 0;
         }
         if(levelChoice == 'ThunderPlains'){
-           ThunderPlainsCount = 0;
+            ThunderPlainsCount = 0;
         }
         if(levelChoice == 'Gagazet'){
             GagazetCount = 0;
         }
-        if(levelChoice == 'Sin'){
-            SinCount = 0;
-        }
     });
     
-    //make the divs and such to hold all our questions and answers
+    //make the game screen
     function gameStart(difficulty){
         //clear the main div for questions and answers
         $(".main").empty();
@@ -129,12 +148,12 @@ $(document).ready(function() {
         }
     };
     
-    //add the right question and answers to the right divs hey hey
+    //populate the game screen with information
     function populate(difficulty){
-
+ 
         //just a time saver
         let question = Questions[difficulty][questionTracker]
-        
+
         //empty out each of the divs for the next set of questin and answers
         $(".question").empty();
         $(".answerNumber").empty();
@@ -150,8 +169,8 @@ $(document).ready(function() {
             $("#row" + i).attr("data-value", question.answers[i].value)
 
             // this is for adding the green and red if they answer wrong 
-            $("#ansNumber" + i).addClass("answer" + question.answers[i].value);
-            $("#answer" + i).addClass("answerL" + question.answers[i].value);
+            $("#answerNumber" + i).addClass("answerNumber" + question.answers[i].value);
+            $("#answer" + i).addClass("answer" + question.answers[i].value);
         }
 
         //start the answer timer
@@ -190,8 +209,11 @@ $(document).ready(function() {
             if(levelChoice == 'ThunderPlains'){
                ThunderPlainsCount = 0;
             }
-            else if(levelChoice == 'Gagazet'){
+            if(levelChoice == 'Gagazet'){
                 GagazetCount = 0;
+            }
+            if(levelChoice == 'Sin'){
+                SinCount=0;
             }
 
             //if player fails to answer the final question on the boss level 
@@ -248,51 +270,32 @@ $(document).ready(function() {
             if (level == 'Gagazet'){
                 GagazetCount++;
             }
-            else if (level == 'Sin'){
+            if (level == 'Sin'){
                 SinCount++;
             }
 
-            //if all this is true boss round
-            if(questionTracker == totalAnswers && 
-                BesaidCount == Questions['Besaid'].length &&
-                LucaCount == Questions['Luca'].length &&
-                DjoseCount == Questions['Djose'].length &&
-                ThunderPlainsCount == Questions['ThunderPlains'].length &&
-                GagazetCount == Questions['Gagazet'].length){
-                    //remove the color classes
-                    colorClasses('off');
-                    //remove the value classes
-                    valueClasses();
-                    //boss round
-                    populate('Sin');
-                    //reset all counts
-                    BesaidCount, LucaCount, DjoseCount, ThunderPlainsCount, GagazetCount = 0;
-            }
             //if victorious against sin show player the victory screen
-            else if(questionTracker = totalAnswers && level == 'Sin' && SinCount == totalAnswers){
+            if(level == 'Sin' && SinCount == totalAnswers){
                 //player victory screen
+                $(".timer").remove()
                 $(".main").empty();
                 var youWin = $("<div class='player-wins'>")
                 $(".main").append(youWin);
                 $(".player-wins").text('YOU WON!');
             }
+            //answer correctly on last question but lose to sin
+            else if (level == 'Sin' && questionTracker == totalAnswers && SinCount !== totalAnswers){
+                loseScreen();
+            }
             //if not on boss level but finished all questions
             else if(questionTracker ==  totalAnswers){
-                //remove the color classes
-                colorClasses('off');
-                //remove the valuse classes
-                valueClasses();
                 //return the player to the difficulty screen
                 difficultyChoice();
             }
             //if not boss level put up next question
             else {
-                //remove the color classes
-                colorClasses('off')
-                //remove the valuse classes
-                valueClasses();
                 //next question
-                populate();
+                populate(level);
             }
         } 
         
@@ -316,6 +319,9 @@ $(document).ready(function() {
             if (level == 'Gagazet'){
                 GagazetCount=0;
             }
+            if (level == 'Sin'){
+                SinCount=0;
+            }
             
             //if last boss question is failed show lose screen
             if(questionTracker == totalAnswers && level == 'Sin'){  
@@ -328,15 +334,13 @@ $(document).ready(function() {
                 //moving to next question or back to difficulty screen
                 if (questionTracker == totalAnswers){
                     colorClasses('off');
-                    valueClasses();  
                     difficultyChoice();
                 } 
                 else {
                     colorClasses('off');
-                    valueClasses();   
-                    populate();
+                    populate(level);
                 }  
-                }, 2000);
+            }, 2000);
         }
     });
 
@@ -348,26 +352,30 @@ $(document).ready(function() {
         //also for removeing the classes prior to new question so that the colors
         //dont remain on the worng answers
         if (state == 'on'){
-            $('#answer1').addClass("right")
-            $('#answer0').addClass("wrong")
-            $('#answerNumber1').addClass("right")
-            $('#answerNumber0').addClass("wrong")
+            for(let i = 0; i < 4; i++){
+                if($('#row'+i).attr('data-value')==1){
+                    $('#row'+i).addClass('right')
+                }
+                else if($('#row'+i).attr('data-value')==0){
+                    $('#row'+i).addClass('wrong')
+                }
+            }
         } 
         else if (state == 'off'){
-            $('#answer1').removeClass("right")
-            $('#answer0').removeClass("wrong")
-            $('#answerNumber1').removeClass("right")
-            $('#answerNumber0').removeClass("wrong")
+            for(let i = 0; i < 4; i++){
+                if($('#row'+i).attr('data-value')==1){
+                    $('#row'+i).removeClass('right')
+                }
+                else if($('#row'+i).attr('data-value')==0){
+                    $('#row'+i).removeClass('wrong')
+                }
+            }
         }
-    }
-    
-    //take away the answer value so that they dont override question to question
-    function valueClasses(){
-        $('.answer-choice').removeAttr('data-level');
     }
     
     //creating the lose screen for the player
     function loseScreen(){
+        $(".timer").remove()
         $(".main").empty();
         var youLose = $("<div class='player-lost'>")
         $(".main").append(youLose);
