@@ -60,7 +60,6 @@ body{
 .main{
     padding: 20px;
     border-radius: 20px;
-    background-color: tan;
     opacity: .7;
     border: 1px solid black;
     min-height: 1px;
@@ -129,10 +128,38 @@ body{
 .difficultyBtn > p{
     font-size: 1em;
 }
+/* a host of colors for the main div depending on screen */
+.choiceColor{
+    background-color: navy;
+    color: white;
+}
+.BesaidColor{
+    background-color: tan;
+}
+.LucaColor{
+    background-color: white;
+    color: black;
+}
+.DjoseColor{
+    background-color: rgb(150, 125, 94);
+}
+.ThunderPlainsColor{
+    background-color: rgb(226, 226, 119);
+}
+.GagazetColor{
+    background-color: grey;
+    color: white;
+}
+.SinColor{
+    background-color: red;
+    color: white;
+}
 
 /* ensureing the question and answer section is centered */
 .timer, .question, .answer-coice {
     align-self: center;
+    box-sizing: content-box;
+    width: 100%;
 }
 row{ 
     display: flex;

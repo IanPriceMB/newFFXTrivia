@@ -38,7 +38,12 @@ $(document).ready(function() {
             $("audio[id*='"+track+"']").get(0).pause();
             $("audio[id*='"+track+"']").get(0).currentTime = 0;
         }
+    }
 
+    //color control
+    function mainColor(screen){
+        $('.main').removeClass('choiceColor BesaidColor LucaColor DjoseColor ThunderPlainsColor GagazetColor SinColor');
+        $('.main').addClass(screen+'Color');
     }
 
     // making sure the music volume isn't too loud
@@ -50,6 +55,7 @@ $(document).ready(function() {
     function backdrop(location){
         $('.background').attr('src', 'images/'+location+'.png')
     }
+
     //start the game on click
     $(".main-startBtn").on('click', function(event){
         event.preventDefault();
@@ -63,6 +69,7 @@ $(document).ready(function() {
         //clear main and remove timer div
         $(".main").empty();
         $(".timer").remove();
+        mainColor('choice')
 
         //this allows for replayability by only reseting boss when difficulty is called
         //as it only needs to be 0 before and every other time doesn't matter
@@ -83,6 +90,7 @@ $(document).ready(function() {
             //reset the question tracker for sin
             questionTracker=0;
             
+            mainColor('Sin')
             musicPlayer('Pursuit', 'on')
 
             const sinText1 = $('<div class="sin-text" >')
@@ -145,6 +153,7 @@ $(document).ready(function() {
         questionTracker=0;
 
         gameStart(levelChoice);
+        mainColor(levelChoice);
         backdrop(levelChoice);
         musicPlayer('choiceMusic', 'off')
         musicPlayer(levelChoice, 'on')

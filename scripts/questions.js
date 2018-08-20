@@ -182,7 +182,7 @@ var Questions = {
                 ]
             },
             {
-                question: "There was a famous High Summoner who hailed fromo the isle of Kilika, what was their name?",
+                question: "There was a famous High Summoner who hailed from the isle of Kilika, what was their name?",
                 answers: [
                     {a : "Ohalland ", value : 1},
                     {a : "Yunaleska", value : 0},
