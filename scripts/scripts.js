@@ -43,7 +43,7 @@ $(document).ready(function() {
 
     // making sure the music volume isn't too loud
     function volume(track) {
-        document.getElementById(track).volume = .05;
+        document.getElementById(track).volume = .3;
     };
     
     //change the background based on level
@@ -433,6 +433,7 @@ $(document).ready(function() {
         }
         if(condition == 'won'){
             musicPlayer('playerWon', 'on')
+            backdrop('loseScreen')
             // document.getElementById('victoryVid').play();
             let youWin = $("<div class='player-wins'>")
             $(".main").append(youWin);
