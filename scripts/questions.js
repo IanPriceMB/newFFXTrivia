@@ -22,10 +22,10 @@ var Questions = {
         {
             question: "The character Yuna's class is a ______?",
             answers: [
-                {a : "Black Mage", value : 0},
-                {a : "Theif     ", value : 0},
-                {a : "Summoner  ", value : 1},
-                {a : "Monk      ", value : 0}
+                {a : "Black Mage ", value : 0},
+                {a : "Theif      ", value : 0},
+                {a : "Summoner   ", value : 1},
+                {a : "Monk       ", value : 0}
             ]
         }
     ],

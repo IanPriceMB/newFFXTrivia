@@ -43,7 +43,7 @@ $(document).ready(function() {
 
     // making sure the music volume isn't too loud
     function volume(track) {
-        document.getElementById(track).volume = .3;
+        document.getElementById(track).volume = 1;
     };
     
     //change the background based on level
