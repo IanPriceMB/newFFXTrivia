@@ -24,27 +24,38 @@ $(document).ready(function() {
     //a global timer for the questions
     let intervalId;
     let timerStart;
+        
+    //tracking the last song played for ease of access
+    let lastSong;
     
     //this let's us control the music that is playing during each section
-    function musicPlayer(track){
-        $('#music-source').removeAttr('src');
-        $('#music-source').attr('src', 'music/'+track+'.mp3');
-        document.getElementById('music-player').play();
-        volume();
-    };
+    function musicPlayer(track, state){
+        if(state == 'on'){
+            $("audio[id*='"+track+"']").get(0).play();
+            volume(track);
+        } 
+        else if(state == 'off'){
+            $("audio[id*='"+track+"']").get(0).pause();
+            $("audio[id*='"+track+"']").get(0).currentTime = 0;
+        }
+
+    }
 
     // making sure the music volume isn't too loud
-    function volume() {
-        document.getElementById('music-player').volume = .05;
+    function volume(track) {
+        document.getElementById(track).volume = .05;
     };
     
+    //change the background based on level
+    function backdrop(location){
+        $('.background').attr('src', 'images/'+location+'.png')
+    }
     //start the game on click
     $(".main-startBtn").on('click', function(event){
         event.preventDefault();
-        $(".main").empty();
-        document.getElementById('music-player').play();
-        volume();
+        $('#player').remove();
         difficultyChoice();
+        document.getElementById('video').addEventListener('ended', cutsceneEnded, false)
     })
     
     //difficulty selection screen
@@ -57,23 +68,32 @@ $(document).ready(function() {
         //as it only needs to be 0 before and every other time doesn't matter
         SinCount = 0;
 
+        //if this isn't the fist time to the difficulty screen turn off the other music
+        if(lastSong){
+            musicPlayer(lastSong, 'off');
+        }
+
         //if all this is true boss round
         if(BesaidCount == Questions['Besaid'].length &&
         LucaCount == Questions['Luca'].length &&
         DjoseCount == Questions['Djose'].length &&
         ThunderPlainsCount == Questions['ThunderPlains'].length &&
         GagazetCount == Questions['Gagazet'].length){
+            
+            //reset the question tracker for sin
             questionTracker=0;
-            //bossround boiz
-            gameStart('Sin');
-            //boss round
-            populate('Sin');
-            //reset all counts
-            BesaidCount, LucaCount, DjoseCount, ThunderPlainsCount, GagazetCount = 0;
+            
+            //cutscene
+            $('#video').addClass('cutscene');
+            document.getElementById("video").play();
         }
 
         //else must be a normal trip to the select screen
         else {
+            //backdrop and music 
+            musicPlayer('choiceMusic', 'on');
+            backdrop('mainSplash')
+
             //create buttons for the difficulty level and assign them stuff
             for (let i = 0; i < levelNames.length; i++){
                 const difficultyBtn = $("<div class='difficultyBtn' >");
@@ -105,9 +125,13 @@ $(document).ready(function() {
     //select your difficulty
     $('body').on("click", '.difficultyBtn', function(){
         levelChoice = $(this).attr("data-level");
+        lastSong = levelChoice;
         questionTracker=0;
 
         gameStart(levelChoice);
+        backdrop(levelChoice);
+        musicPlayer('choiceMusic', 'off')
+        musicPlayer(levelChoice, 'on')
         populate(levelChoice);
 
         // this section ensures that the boss level will only trigger if all the other levels have been beaten
@@ -135,7 +159,7 @@ $(document).ready(function() {
 
         //append the question field and the timer
         $(".main").append("<div class='question'>");
-        $("body").append("<div class='timer'>");  
+        $(".main").prepend("<div class='timer'>");  
 
         //dynamically append the divs for the answers to the main div
         for (let i = 0; i < Questions[difficulty][questionTracker].answers.length; i++){
@@ -227,7 +251,7 @@ $(document).ready(function() {
             //if player fails to answer the final question on the boss level 
             //tell the player that they have lost
             if(questionTracker == Questions[levelChoice].length && levelChoice == 'Sin'){ 
-                loseScreen(); 
+                endgameScreen('lost'); 
             }
             //if player fails last question in the set by timer
             //send player to the difficulty screen
@@ -285,15 +309,11 @@ $(document).ready(function() {
             //if victorious against sin show player the victory screen
             if(level == 'Sin' && SinCount == totalAnswers){
                 //player victory screen
-                $(".timer").remove()
-                $(".main").empty();
-                let youWin = $("<div class='player-wins'>")
-                $(".main").append(youWin);
-                $(".player-wins").text('YOU WON!');
+                endgameScreen('won');
             }
             //answer correctly on last question but lose to sin
             else if (level == 'Sin' && questionTracker == totalAnswers && SinCount !== totalAnswers){
-                loseScreen();
+                endgameScreen('lost');
             }
             //if not on boss level but finished all questions
             else if(questionTracker ==  totalAnswers){
@@ -333,7 +353,7 @@ $(document).ready(function() {
             
             //if last boss question is failed show lose screen
             if(questionTracker == totalAnswers && level == 'Sin'){  
-                loseScreen();
+                endgameScreen('lost');
             }
 
             //timeout function so that the colors show answer for a bit
@@ -380,13 +400,44 @@ $(document).ready(function() {
             }
         }
     }
-    
+
+    //when the video ends load up sin level
+    function cutsceneEnded(){
+        $('#video').removeClass('cutscene')
+
+        //backdrop and music 
+        musicPlayer('Sin', 'on');
+        backdrop('Sin')
+
+        //bossround boiz
+        gameStart('Sin');
+
+        //boss round
+        populate('Sin');
+
+        //reset all counts
+        BesaidCount, LucaCount, DjoseCount, ThunderPlainsCount, GagazetCount = 0;
+    }
+
     //creating the lose screen for the player
-    function loseScreen(){
+    function endgameScreen(condition){
         $(".timer").remove()
         $(".main").empty();
-        let youLose = $("<div class='player-lost'>")
-        $(".main").append(youLose);
-        $(".player-lost").text('YOU LOST!');
+        musicPlayer('Sin', 'off')
+        if(condition == 'lost'){
+            musicPlayer('playerLost', 'on')
+            backdrop('loseScreen')
+            let youLose = $("<div class='player-lost'>")
+            $(".main").append(youLose);
+            $(".player-lost").text('YOU LOST!');
+        }
+        if(condition == 'won'){
+            musicPlayer('playerWon', 'on')
+            // document.getElementById('victoryVid').play();
+            let youWin = $("<div class='player-wins'>")
+            $(".main").append(youWin);
+            $(".player-wins").text('YOU WON!');
+        }
+
     };
 });

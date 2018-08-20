@@ -55,7 +55,7 @@ var Questions = {
                     {a : "The Jecht Shot", value : 0},
                     {a : "The Magnificent Jecht Shot", value : 0},
                     {a : "The Sublimely Magnificent Jecht Shot", value : 0},
-                    {a : "The Sublimely Magnificent Jecht Shot MK III", value : 1}
+                    {a : "The Sublimely Magnificent Jecht Shot Mark III", value : 1}
                 ]
             },
             {
@@ -80,7 +80,7 @@ var Questions = {
             ]
             },
             {
-                question: "The fiends called Cactuar's live where?",
+                question: "The fiends known as Cactuar's live where?",
                 answers: [
                     {a : "The Mi'ihen Highroad & The Thunder Plains", value : 0},
                     {a : "Luca Stadium & Kilika Island", value : 0},
@@ -89,11 +89,11 @@ var Questions = {
                 ]
             },
             {
-                question: "Who are the reigning Blitzball League champions when you first arrive in Luca?",
+                question: "During the main story, who are the reigning Blitzball League champions when you first arrive in Luca?",
                 answers: [
                     {a : "Ronso Fangs", value : 0},
                     {a : "Zanarkand Abes", value : 0},
-                    {a : "Luca Goers", value : 1},
+                    {a : "The Luca Goers", value : 1},
                     {a : "Al Bhed Psyches", value : 0}
                 ]
             }
@@ -119,7 +119,7 @@ var Questions = {
                 ]
             },
             {
-                question: "There was a famous summoner from the island of Kilika, what was their name?",
+                question: "There was a famous High Summoner from the island of Kilika, what was their name?",
                 answers: [
                     {a : "Ohalland", value : 1},
                     {a : "Yunaleska", value : 0},
@@ -172,10 +172,10 @@ var Questions = {
             {
                 question: "What is the 13th word Rikku ever says, and what does it mean?",
                 answers: [
-                    {a : "feyd, wait", value : 0},
-                    {a : "cunno, sorry", value : 0},
-                    {a : "fedr, with", value : 1},
-                    {a : "Oui, you", value : 0}
+                    {a : "feyd, wait     ", value : 0},
+                    {a : "cunno, sorry   ", value : 0},
+                    {a : "fedr, with     ", value : 1},
+                    {a : "Oui, you       ", value : 0}
                 ]
             },
             {
@@ -192,8 +192,8 @@ var Questions = {
                 answers: [
                     {a : "Taic Aq Sylrehy", value : 0},
                     {a : "Dobruuh Lmyf", value : 0},
-                    {a : "Suukma", value : 1},
-                    {a : "Kutryht", value : 0}
+                    {a : "Suukma      ", value : 1},
+                    {a : "Kutryht     ", value : 0}
                 ]
             }
         ]

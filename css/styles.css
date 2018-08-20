@@ -1,18 +1,161 @@
+/* these initial classes are here for dynamic styling purposes only */
+
+/* these classes help the player learn the proper answers */
 .wrong{
     color: red;
 }
 .right{
     color: green;
 }
+
+/* this class is for hidding difficulties after they have been 100%ed */
 .hidden{
     visibility: hidden;
 }
-/* html, body, .background{
+
+/* I wante a single page no scroll layout so I set that up here */
+html, body, .background{
     width: 100%;
     height: 100%;
-} */
-/* .background{
-    background-image: url("../images/mainSplash.png");
-    background-repeat: no-repeat;
+    margin: 0;
+} 
+/* display the image full screen */
+.background{
+    display: block;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+}
+
+/* I made an api call to the youtube player api to bypass chrome stopping autoplay on music and movies
+so I have to hide the video behind the background image until i destroy it on game start */
+.player, .video{
     z-index: 1;
-} */
+    position: fixed;
+    top: 0;
+}
+
+/* dynamically show the cutscene video */
+.cutscene{
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+}
+
+/* this is where I have my main styling I went with flex box just for the sake of practice */
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+/* making sure the game elements are the on the highest z-plane */
+.main, .timer{
+    z-index: 3;
+}
+/* setting up the sizing and flexness of the main div */
+.main{
+    padding: 20px;
+    border-radius: 20px;
+    background-color: tan;
+    opacity: .7;
+    border: 1px solid black;
+    min-height: 1px;
+    max-height: 70vh;
+    min-width: 30vw;
+    max-width: 40vw;
+    flex-wrap: wrap;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+}
+
+/* ensureing the title itmes are centered */
+.main-title, .main-subtitle, .main-startBtn{
+    align-self: center;
+}
+/* additional style for the main screen */
+.main-title{
+    font-size: 3em;
+    margin: 0;
+}
+.main-subtitle{
+    font-size: 2em;
+}
+.main-startBtn{
+    background-color: black;
+    color: white;
+    opacity: .8;
+    box-sizing: border-box;
+    width: 80%;
+    border-radius: 20px;
+    border: solid white;
+    font-size: 3em;
+}
+.main-startBtn > h2 {
+    margin: 10px;
+}
+
+/* ensureing the difficulty selection screen is centered */
+.difficultyBtn{
+    align-self: center;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: black;
+    border: solid white;
+    opacity: .8;
+}
+.difficultyBtn{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.difficultyBtn:nth-child(5){
+    margin-bottom: 0;
+}
+.difficultyBtn >  h2, .difficultyBtn > p {
+    align-self: center;
+    color: white;
+    opacity: 1;
+    margin: 0;
+}
+.difficultyBtn >  h2{
+    font-size: 2em;
+}
+.difficultyBtn > p{
+    font-size: 1em;
+}
+
+/* ensureing the question and answer section is centered */
+.timer, .question, .answer-coice {
+    align-self: center;
+}
+row{ 
+    display: flex;
+}
+.answerNumber{
+    box-sizing: content-box;
+    width: 10%;
+}
+.answer{
+    box-sizing: content-box;
+    width: 90%;
+}
+.timer, .question{
+    font-size: 2em;
+}
+.timer > h3{
+    margin: 0;
+}
+.answer, .answerNumber{
+    font-size: 1.5em;
+}
+
+/* win and lose screen style */
+.player-wins, .player-lost{
+    align-self: center;
+    font-size: 3em;
+}
