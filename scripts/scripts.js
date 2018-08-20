@@ -436,11 +436,12 @@ $(document).ready(function() {
 
         //bossround boiz
         gameStart('Sin');
+        mainColor('fightSin');
 
         //boss round
         populate('Sin');
 
-        //reset all counts
+        //reset all counts take this away when add replay button and put it there
         BesaidCount, LucaCount, DjoseCount, ThunderPlainsCount, GagazetCount = 0;
     }
 

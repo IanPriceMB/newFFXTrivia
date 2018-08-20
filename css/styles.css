@@ -135,6 +135,7 @@ body{
 }
 .BesaidColor{
     background-color: tan;
+    color: black;
 }
 .LucaColor{
     background-color: white;
@@ -142,9 +143,11 @@ body{
 }
 .DjoseColor{
     background-color: rgb(150, 125, 94);
+    color: black;
 }
 .ThunderPlainsColor{
     background-color: rgb(226, 226, 119);
+    color: black;
 }
 .GagazetColor{
     background-color: grey;
@@ -154,12 +157,15 @@ body{
     background-color: red;
     color: white;
 }
+.fightSinColor{
+    background-color: black;
+    color: white;
+}
 
 /* ensureing the question and answer section is centered */
 .timer, .question, .answer-coice {
     align-self: center;
-    box-sizing: content-box;
-    width: 100%;
+    text-align: center;
 }
 row{ 
     display: flex;
