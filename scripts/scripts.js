@@ -15,6 +15,14 @@ $(document).ready(function() {
     let GagazetCount;
     let SinCount;
 
+    //to track the current score fo each level for the end level screen
+    let BesaidScore;
+    let LucaScore;
+    let DjoseScore;
+    let ThunderPlainsScore;
+    let GagazetScore;
+
+
     // a global tracker for the currently selected level
     let levelChoice;
 
@@ -65,6 +73,7 @@ $(document).ready(function() {
     })
     
     //difficulty selection screen
+    //sin screen
     function difficultyChoice(){
         //clear main and remove timer div
         $(".main").empty();
@@ -74,6 +83,13 @@ $(document).ready(function() {
         //this allows for replayability by only reseting boss when difficulty is called
         //as it only needs to be 0 before and every other time doesn't matter
         SinCount = 0;
+
+        //reset the score for each level
+        BesaidScore=0;
+        LucaScore=0;
+        DjoseScore=0;
+        ThunderPlainsScore=0;
+        GagazetScore=0;
 
         //if this isn't the fist time to the difficulty screen turn off the other music
         if(lastSong){
@@ -90,9 +106,12 @@ $(document).ready(function() {
             //reset the question tracker for sin
             questionTracker=0;
             
+            //sin music and engage button box color
             mainColor('Sin')
             musicPlayer('Pursuit', 'on')
+            backdrop('sinSighted')
 
+            //fill the main box with an accept button
             const sinText1 = $('<div class="sin-text" >')
             $('.main').append(sinText1);
             sinText1.text('Sin has been sighted!')
@@ -281,7 +300,25 @@ $(document).ready(function() {
             //if player fails last question in the set by timer
             //send player to the difficulty screen
             else if (questionTracker == Questions[levelChoice].length){
-                difficultyChoice();
+                // difficultyChoice();
+                var score;
+                //reset level count for wrong answer
+                if (level == 'Besaid'){                  
+                    score = BesaidScore;
+                }
+                if (level == 'Luca'){                 
+                    score = LucaScore;
+                }
+                if (level == 'Djose'){                    
+                    score = DjoseScore;
+                }
+                if (level == 'ThunderPlains'){                  
+                    score = ThunderPlainsScore;
+                }
+                if (level == 'Gagazet'){
+                    score = GagazetScore;
+                }
+                endLevelscreen(level, score)
             }
             //if player fails by timer and it is not the last question
             //set next question
@@ -298,6 +335,7 @@ $(document).ready(function() {
 
     //on click of an answer option
     $('body').on('click', '.answer-choice', function(){
+        console.log('on click of answer ' + BesaidScore)
         //stop the tiemer and update the question trcker
         stop();
         questionTracker++;
@@ -314,18 +352,23 @@ $(document).ready(function() {
             //update the score counts for the boss round
             if (level == 'Besaid'){
                 BesaidCount++;
+                BesaidScore++;
             }
             if (level == 'Luca'){
                 LucaCount++;
+                LucaScore++;
             }
             if (level == 'Djose'){
                 DjoseCount++;
+                DjoseScore++;
             }
             if (level == 'ThunderPlains'){
                 ThunderPlainsCount++;
+                ThunderPlainsScore++;
             }
             if (level == 'Gagazet'){
                 GagazetCount++;
+                GagazetScore++;
             }
             if (level == 'Sin'){
                 SinCount++;
@@ -343,7 +386,25 @@ $(document).ready(function() {
             //if not on boss level but finished all questions
             else if(questionTracker ==  totalAnswers){
                 //return the player to the difficulty screen
-                difficultyChoice();
+                // difficultyChoice();
+                var score;
+                //reset level count for wrong answer
+                if (level == 'Besaid'){                  
+                    score = BesaidScore;
+                }
+                if (level == 'Luca'){                 
+                    score = LucaScore;
+                }
+                if (level == 'Djose'){                    
+                    score = DjoseScore;
+                }
+                if (level == 'ThunderPlains'){                  
+                    score = ThunderPlainsScore;
+                }
+                if (level == 'Gagazet'){
+                    score = GagazetScore;
+                }
+                endLevelscreen(level, score)
             }
             //if not boss level put up next question
             else {
@@ -356,21 +417,27 @@ $(document).ready(function() {
         else if (answer == 0){
             //add color classes
             colorClasses('on')
+            var score;
             //reset level count for wrong answer
             if (level == 'Besaid'){
                 BesaidCount=0;
+                score = BesaidScore;
             }
             if (level == 'Luca'){
                 LucaCount=0;
+                score = LucaScore;
             }
             if (level == 'Djose'){
                 DjoseCount=0;
+                score = DjoseScore;
             }
             if (level == 'ThunderPlains'){
                 ThunderPlainsCount=0;
+                score = ThunderPlainsScore;
             }
             if (level == 'Gagazet'){
                 GagazetCount=0;
+                score = GagazetScore;
             }
             if (level == 'Sin'){
                 SinCount=0;
@@ -387,7 +454,8 @@ $(document).ready(function() {
                 //moving to next question or back to difficulty screen
                 if (questionTracker == totalAnswers && level !== 'Sin'){
                     colorClasses('off');
-                    difficultyChoice();
+                    // difficultyChoice();
+                    endLevelscreen(level, score)
                 } 
                 else if (questionTracker !== totalAnswers){
                     colorClasses('off');
@@ -445,6 +513,48 @@ $(document).ready(function() {
         BesaidCount, LucaCount, DjoseCount, ThunderPlainsCount, GagazetCount = 0;
     }
 
+    //end of level screen
+    function endLevelscreen(level, score){
+        console.log(level)
+        console.log(score)
+
+        $('.main').empty()
+
+        let percent;
+        if(score == 0){
+            percent='0% uvv...';
+        } else if(score == 1){
+            percent='20% dno ryntan.';
+        } else if(score == 2){
+            percent='40% hud pyt.';
+        } else if(score == 3){
+            percent='60% kuut zup.';
+        } else if(score == 4){
+            percent='80% knayd!';
+        } else if(score == 5){
+            percent='100% yfacusa!!';
+        }
+        
+        const header = $('<h3 class="endLevel-header">');
+        if(level !== "ThunderPlains"){
+            header.text(level);
+        } else {
+            header.text('Thunder Plains');
+        }
+        const subHeader = $('<h4 class="endLevel-subHeader">');
+        subHeader.text('You scored a ' + percent);
+        const secret = $('<p class="endLevel-secret">');
+        secret.text('Complete all levels with 100% and something amazing will happen.');
+        const retry = $('<button class="retryBtn">');
+        if(score !== 5){
+            retry.text('Try again?')
+        } else if(score == 5){
+            retry.text('Play again!')
+        }
+        $('.main').append(header).append(subHeader).append(secret).append(retry)
+
+        $('body').on('click', '.retryBtn', difficultyChoice)
+    }
     //creating the lose screen for the player
     function endgameScreen(condition){
         $(".timer").remove()
@@ -456,6 +566,9 @@ $(document).ready(function() {
             let youLose = $("<div class='player-lost'>")
             $(".main").append(youLose);
             $(".player-lost").text('YOU LOST!');
+            const retry = $('<button class="retryBtn">');
+            retry.text('Try again?')
+            $('.main').append(retry);
         }
         if(condition == 'won'){
             musicPlayer('playerWon', 'on')
@@ -464,7 +577,10 @@ $(document).ready(function() {
             let youWin = $("<div class='player-wins'>")
             $(".main").append(youWin);
             $(".player-wins").text('YOU WON!');
+            const retry = $('<button class="retryBtn">');
+            retry.text('Play again!')
+            $('.main').append(retry);
         }
-
+        // $('body').on('click', '.retryBtn', difficultyChoice)
     };
 });

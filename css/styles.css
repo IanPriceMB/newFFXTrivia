@@ -75,6 +75,7 @@ body{
 /* ensureing the title itmes are centered */
 .main-title, .main-subtitle, .main-startBtn{
     align-self: center;
+    text-align: center;
 }
 /* additional style for the main screen */
 .main-title{
@@ -148,7 +149,7 @@ body{
 }
 .GagazetColor{
     background-color: grey;
-    color: white;
+    color: black;
 }
 .SinColor{
     background-color: red;
@@ -160,7 +161,7 @@ body{
 }
 
 /* ensureing the question and answer section is centered */
-.timer, .question, .answer-coice {
+.timer, .question {
     align-self: center;
     text-align: center;
 }
@@ -186,6 +187,27 @@ row{
     height: 3em;
     cursor: pointer;
 }
+.answer-choice:hover{
+    border: 1px black solid;
+    border-radius: 10px;
+}
+
+/* end level screen */
+.endLevel-header, .endLevel-subHeader, .endLevel-secret{
+    align-self: center;
+    margin: 0;
+    text-align: center;
+}
+.endLevel-header{
+    font-size: 4em;
+    margin: 0;
+}
+.endLevel-subHeader{
+    font-size: 3em;
+}
+.endLevel-secret{
+    font-size: 1.5em;
+}
 
 /* sin has been sighted */
 .sin-text{
@@ -193,7 +215,7 @@ row{
     font-size: 3em;
 }
 
-.sin-startBtn{
+.sin-startBtn, .retryBtn{
     background-color: black;
     color: white;
     box-sizing: border-box;
