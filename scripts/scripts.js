@@ -43,7 +43,7 @@ $(document).ready(function() {
 
     // making sure the music volume isn't too loud
     function volume(track) {
-        document.getElementById(track).volume = 1;
+        document.getElementById(track).volume = .05;
     };
     
     //change the background based on level
@@ -83,9 +83,25 @@ $(document).ready(function() {
             //reset the question tracker for sin
             questionTracker=0;
             
+            musicPlayer('Pursuit', 'on')
+
+            const sinText1 = $('<div class="sin-text" >')
+            $('.main').append(sinText1);
+            sinText1.text('Sin has been sighted!')
+            const sinText2 = $('<div class="sin-text" >')
+            $('.main').append(sinText2);
+            sinText2.text('Engage?');
+            const sinBtn = $('<button class="sin-startBtn" >');
+            $('.main').append(sinBtn);
+            sinBtn.text("Let's do this!");
+
             //cutscene
-            $('#video').addClass('cutscene');
-            document.getElementById("video").play();
+            $('body').on('click', '.sin-startBtn', function(event){
+                event.preventDefault();
+                musicPlayer('Pursuit', 'off')
+                $('#video').addClass('cutscene');
+                document.getElementById("video").play();
+            })
         }
 
         //else must be a normal trip to the select screen
@@ -360,11 +376,11 @@ $(document).ready(function() {
             setTimeout(function(){
                 //if last question and not boss level show color classes for 2 secons before
                 //moving to next question or back to difficulty screen
-                if (questionTracker == totalAnswers){
+                if (questionTracker == totalAnswers && level !== 'Sin'){
                     colorClasses('off');
                     difficultyChoice();
                 } 
-                else {
+                else if (questionTracker !== totalAnswers){
                     colorClasses('off');
                     populate(level);
                 }  
@@ -382,20 +398,20 @@ $(document).ready(function() {
         if (state == 'on'){
             for(let i = 0; i < 4; i++){
                 if($('#row'+i).attr('data-value')==1){
-                    $('#row'+i).addClass('right')
+                    $('#row'+i).removeClass('answer-choice').addClass('right')
                 }
                 else if($('#row'+i).attr('data-value')==0){
-                    $('#row'+i).addClass('wrong')
+                    $('#row'+i).removeClass('answer-choice').addClass('wrong')
                 }
             }
         } 
         else if (state == 'off'){
             for(let i = 0; i < 4; i++){
                 if($('#row'+i).attr('data-value')==1){
-                    $('#row'+i).removeClass('right')
+                    $('#row'+i).removeClass('right').addClass('answer-choice')
                 }
                 else if($('#row'+i).attr('data-value')==0){
-                    $('#row'+i).removeClass('wrong')
+                    $('#row'+i).removeClass('wrong').addClass('answer-choice')
                 }
             }
         }

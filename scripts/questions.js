@@ -1,37 +1,16 @@
 var Questions = {
     //Besaid / very easy questions
-    Besaid: [
-        {
-            question: "Who is the main character of Final Fantasy X?",
-            answers: [
-                {a : "Teedus", value : 0},
-                {a : "Tyedus", value : 0},
-                {a : "Tidus ", value : 1},
-                {a : "Tidos ", value : 0}
-            ]
-        },
-        {
-            question: "What does the character Wakka use for a weapon?",
-            answers: [
-                {a : "A Sword    ", value : 0},
-                {a : "A Blitzball", value : 1},
-                {a : "A Doll     ", value : 0},
-                {a : "A Trident  ", value : 0}
-            ]
-        },
-        {
-            question: "The character Yuna's class is a ______?",
-            answers: [
-                {a : "Black Mage ", value : 0},
-                {a : "Theif      ", value : 0},
-                {a : "Summoner   ", value : 1},
-                {a : "Monk       ", value : 0}
-            ]
-        }
-    ],
-        //Luca / easy questions
-        Luca: [
-                {
+        Besaid: [
+            {
+                question: "Who is the main character of Final Fantasy X?",
+                answers: [
+                    {a : "Teedus", value : 0},
+                    {a : "Tyedus", value : 0},
+                    {a : "Tidus ", value : 1},
+                    {a : "Tidos ", value : 0}
+                ]
+            },
+            {
                 question: "What is Tidus' home city called?",
                 answers: [
                     {a : "Zanarkand  ", value : 1},
@@ -40,6 +19,36 @@ var Questions = {
                     {a : "Mt. Gagazet", value : 0}
                 ]
             },
+            {
+                question: "What does the character Wakka use for a weapon?",
+                answers: [
+                    {a : "A Sword    ", value : 0},
+                    {a : "A Blitzball", value : 1},
+                    {a : "A Doll     ", value : 0},
+                    {a : "A Trident  ", value : 0}
+                ]
+            },
+            {
+                question: "The character Yuna's class is a ______?",
+                answers: [
+                    {a : "Black Mage ", value : 0},
+                    {a : "Theif      ", value : 0},
+                    {a : "Summoner   ", value : 1},
+                    {a : "Monk       ", value : 0}
+                ]
+            },
+            {
+                question: "The character Wakka is from which town in Spira?",
+                answers: [
+                    {a : "Kilika     ", value : 0},
+                    {a : "Besaid     ", value : 1},
+                    {a : "Baaj       ", value : 0},
+                    {a : "Mi'ihen    ", value : 0}
+                ]
+            }
+        ],
+        //Luca / easy questions
+        Luca: [
             {
                 question: "What race is the character Kimahri?",
                 answers: [
@@ -50,7 +59,7 @@ var Questions = {
                 ]
             },
             {
-                question: "What is the name of Tidus' father's favorite Blitzball move?",
+                question: "What is the full name of Tidus' father's favorite Blitzball move?",
                 answers: [
                     {a : "The Jecht Shot                               ", value : 0},
                     {a : "The Magnificent Jecht Shot                   ", value : 0},
@@ -66,18 +75,45 @@ var Questions = {
                     {a : "Braska ", value : 1},
                     {a : "Kimahri", value : 0}
                 ]
+            },
+            {
+                question: "The character Yuna is named after which other character from Final Fantasy X?",
+                answers: [
+                    {a : "Yuna the Ancient       ", value : 0},
+                    {a : "High Summoner Yunafreya", value : 0},
+                    {a : "Lord Yuno              ", value : 0},
+                    {a : "Lady Yunaleska         ", value : 1}
+                ]
+            },
+            {
+                question: "Tidus' 'Brotherhood' sword was given to him by this character.",
+                answers: [
+                    {a : "Wakka ", value : 1},
+                    {a : "Auron ", value : 0},
+                    {a : "Jecht ", value : 0},
+                    {a : "Symour", value : 0}
+                ]
             }
         ],
     //Djose / medium questions
         Djose: [
             {
-            question: "How many 'capture-able' fiend speicies are there in the Calm Lands?",
-            answers: [
-                {a : "9 ", value : 1},
-                {a : "10", value : 0},
-                {a : "7 ", value : 0},
-                {a : "8 ", value : 0}
-            ]
+                question: "What is the name of Seymour Guado's overdrive?",
+                answers: [
+                    {a : "Relinquish ", value : 0},
+                    {a : "Oblivion   ", value : 0},
+                    {a : "Requiem    ", value : 1},
+                    {a : "Hellscape  ", value : 0}
+                ]
+            },
+            {
+                question: "How many 'capture-able' fiend speicies are there in the Calm Lands?",
+                answers: [
+                    {a : "9 ", value : 1},
+                    {a : "10", value : 0},
+                    {a : "7 ", value : 0},
+                    {a : "8 ", value : 0}
+                ]
             },
             {
                 question: "The fiends known as Cactuar's live where?",
@@ -89,12 +125,21 @@ var Questions = {
                 ]
             },
             {
-                question: "During the main story, who are the reigning Blitzball League champions when you first arrive in Luca?",
+                question: "Who are the reigning Blitzball League champions when you first arrive in Luca?",
                 answers: [
                     {a : "Ronso Fangs    ", value : 0},
                     {a : "Zanarkand Abes ", value : 0},
                     {a : "The Luca Goers ", value : 1},
                     {a : "Al Bhed Psyches", value : 0}
+                ]
+            },
+            {
+                question: "For how many years has Maester Mika held office?",
+                answers: [
+                    {a : "50 ", value : 1},
+                    {a : "100", value : 0},
+                    {a : "25 ", value : 0},
+                    {a : "10 ", value : 0}
                 ]
             }
         ],
@@ -119,7 +164,25 @@ var Questions = {
                 ]
             },
             {
-                question: "There was a famous High Summoner from the island of Kilika, what was their name?",
+                question: "What was the name of the machina weapon that attacked the party underneath the waters of the Moonflow?",
+                answers: [
+                    {a : "Crawler     ", value : 0},
+                    {a : "Oblitzerator", value : 0},
+                    {a : "Extractor   ", value : 1},
+                    {a : "Scavenger   ", value : 0}
+                ]
+            },
+            {
+                question: "How many Al Bhed Primers can be found in the Sanubia Desert on Bikanel Island?",
+                answers: [
+                    {a : "5", value : 0},
+                    {a : "3", value : 0},
+                    {a : "2", value : 1},
+                    {a : "4", value : 0}
+                ]
+            },
+            {
+                question: "There was a famous High Summoner who hailed fromo the isle of Kilika, what was their name?",
                 answers: [
                     {a : "Ohalland ", value : 1},
                     {a : "Yunaleska", value : 0},
@@ -156,6 +219,24 @@ var Questions = {
                     {a : "Yes, by using a pheonix down on them.     ", value : 0},
                     {a : "Yes, by using the 'steal' ability on them.", value : 1}
                 ]
+            },
+            {
+                question: "What are the names of the Al Bhed Psyches Left Winger, the Ronso Fangs Mid Fielder, and the Kilika Beasts Right Defenseman?",
+                answers: [
+                    {a : "Larbeight, Balgerda, Irga", value : 0},
+                    {a : "Deim, Ganza, Eigaar      ", value : 1},
+                    {a : "Kulukan, Blappa, Abus    ", value : 0},
+                    {a : "Vuroja, Noy, Kyou        ", value : 0}
+                ]
+            },
+            {
+                question: "How many perpendicular supporting arches connect Remiem temple to the cliff faces surrounding it?",
+                answers: [
+                    {a : "8 ", value : 0},
+                    {a : "10", value : 1},
+                    {a : "12", value : 0},
+                    {a : "14", value : 0}
+                ]
             }
         ],
     //sin questions
@@ -172,10 +253,10 @@ var Questions = {
             {
                 question: "What is the 13th word Rikku ever says, and what does it mean?",
                 answers: [
-                    {a : "feyd, wait  ", value : 0},
-                    {a : "cunno, sorry", value : 0},
-                    {a : "fedr, with  ", value : 1},
-                    {a : "Oui, you    ", value : 0}
+                    {a : "feyd, wait           ", value : 0},
+                    {a : "cunno, sorry         ", value : 0},
+                    {a : "fedr, with           ", value : 1},
+                    {a : "oui, you             ", value : 0}
                 ]
             },
             {
@@ -188,12 +269,21 @@ var Questions = {
                 ]
             },
             {
+                question: "What is the 14th letter of the English alphabet once translated into Al Bhed?",
+                answers: [
+                    {a : "a", value : 0},
+                    {a : "x", value : 0},
+                    {a : "s", value : 1},
+                    {a : "h", value : 0}
+                ]
+            },
+            {
                 question: "Frelr uv dra vummufehk ec hud y faybuh vun Neggi?",
                 answers: [
-                    {a : "Taic Aq Sylrehy", value : 0},
-                    {a : "Dobruuh Lmyf   ", value : 0},
-                    {a : "Suukma         ", value : 1},
-                    {a : "Kutryht        ", value : 0}
+                    {a : "Taic Aq Sylrehy    ", value : 0},
+                    {a : "Dobruuh Lmyf       ", value : 0},
+                    {a : "Suukma             ", value : 1},
+                    {a : "Kutryht            ", value : 0}
                 ]
             }
         ]

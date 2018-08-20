@@ -48,7 +48,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
 
 /* making sure the game elements are the on the highest z-plane */
@@ -152,6 +153,25 @@ row{
 }
 .answer, .answerNumber{
     font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* sin has been sighted */
+.sin-text{
+    align-self: center;
+    font-size: 3em;
+}
+
+.sin-startBtn{
+    background-color: black;
+    color: white;
+    opacity: .8;
+    box-sizing: border-box;
+    width: 80%;
+    border-radius: 20px;
+    border: solid white;
+    font-size: 3em;
+    align-self: center;
 }
 
 /* win and lose screen style */

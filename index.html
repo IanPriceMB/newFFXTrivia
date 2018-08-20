@@ -45,6 +45,9 @@
             <audio id='Sin' loop >  
                 <source id='music-source' src="music/Sin.mp3" type="audio/mpeg"/> 
             </audio>
+            <audio id='Pursuit' loop >  
+                <source id='music-source' src="music/Pursuit.mp3" type="audio/mpeg"/> 
+            </audio>
         </div>
         <video class='video' id="video">
             <source src="movies/sinOnBeveleSpire.mp4" type="video/mp4">
@@ -77,7 +80,7 @@
         // 4. The API will call this function when the video player is ready.
         function onPlayerReady(event) {
             event.target.playVideo();
-            event.target.setVolume(100);
+            event.target.setVolume(30);
         }
         // 5. The API calls this function when the player's state changes.
         //    The function indicates that when playing a video (state=1),
