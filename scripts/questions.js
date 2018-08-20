@@ -82,7 +82,7 @@ var Questions = {
                     {a : "Yuna the Ancient       ", value : 0},
                     {a : "High Summoner Yunafreya", value : 0},
                     {a : "Lord Yuno              ", value : 0},
-                    {a : "Lady Yunaleska         ", value : 1}
+                    {a : "Lady Yunalesca         ", value : 1}
                 ]
             },
             {
@@ -109,10 +109,10 @@ var Questions = {
             {
                 question: "How many 'capture-able' fiend speicies are there in the Calm Lands?",
                 answers: [
-                    {a : "9 ", value : 1},
-                    {a : "10", value : 0},
-                    {a : "7 ", value : 0},
-                    {a : "8 ", value : 0}
+                    {a : "Nine  ", value : 1},
+                    {a : "Ten   ", value : 0},
+                    {a : "Seven ", value : 0},
+                    {a : "Eight ", value : 0}
                 ]
             },
             {
@@ -136,10 +136,10 @@ var Questions = {
             {
                 question: "For how many years has Maester Mika held office?",
                 answers: [
-                    {a : "50 ", value : 1},
-                    {a : "100", value : 0},
-                    {a : "25 ", value : 0},
-                    {a : "10 ", value : 0}
+                    {a : "Fifty       ", value : 1},
+                    {a : "One hundred ", value : 0},
+                    {a : "Twenty-Five ", value : 0},
+                    {a : "Ten         ", value : 0}
                 ]
             }
         ],
@@ -175,10 +175,10 @@ var Questions = {
             {
                 question: "How many Al Bhed Primers can be found in the Sanubia Desert on Bikanel Island?",
                 answers: [
-                    {a : "5", value : 0},
-                    {a : "3", value : 0},
-                    {a : "2", value : 1},
-                    {a : "4", value : 0}
+                    {a : "Five ", value : 0},
+                    {a : "Three", value : 0},
+                    {a : "Two  ", value : 1},
+                    {a : "Four ", value : 0}
                 ]
             },
             {
@@ -232,10 +232,10 @@ var Questions = {
             {
                 question: "How many perpendicular supporting arches connect Remiem temple to the cliff faces surrounding it?",
                 answers: [
-                    {a : "8 ", value : 0},
-                    {a : "10", value : 1},
-                    {a : "12", value : 0},
-                    {a : "14", value : 0}
+                    {a : "Eight   ", value : 0},
+                    {a : "Ten     ", value : 1},
+                    {a : "Twelve  ", value : 0},
+                    {a : "Fourteen", value : 0}
                 ]
             }
         ],
@@ -244,10 +244,10 @@ var Questions = {
             {
             question: "How many 'Original' fiends become available at the monster arena via the fiend catching sidequest?",
             answers: [
-                {a : "5", value : 0},
-                {a : "4", value : 1},
-                {a : "8", value : 0},
-                {a : "2", value : 0}
+                {a : "Five ", value : 0},
+                {a : "Four ", value : 1},
+                {a : "Eight", value : 0},
+                {a : "Two  ", value : 0}
             ]
             },
             {
@@ -262,19 +262,19 @@ var Questions = {
             {
                 question: "How many fiends in Spira have names that start with the letter 'G'?",
                 answers: [
-                    {a : "10", value : 0},
-                    {a : "12", value : 0},
-                    {a : "9 ", value : 0},
-                    {a : "11", value : 1}
+                    {a : "Ten   ", value : 0},
+                    {a : "Twelve", value : 0},
+                    {a : "Nine  ", value : 0},
+                    {a : "Eleven", value : 1}
                 ]
             },
             {
                 question: "What is the 14th letter of the English alphabet once translated into Al Bhed?",
                 answers: [
-                    {a : "a", value : 0},
-                    {a : "x", value : 0},
-                    {a : "s", value : 1},
-                    {a : "h", value : 0}
+                    {a : "A", value : 0},
+                    {a : "X", value : 0},
+                    {a : "S", value : 1},
+                    {a : "H", value : 0}
                 ]
             },
             {
