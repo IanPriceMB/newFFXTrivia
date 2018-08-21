@@ -22,17 +22,12 @@ $(document).ready(function() {
     let ThunderPlainsScore;
     let GagazetScore;
 
-
     // a global tracker for the currently selected level
     let levelChoice;
 
     // a global tracker for which question you are on given each difficulty
     let questionTracker;
 
-    //a global timer for the questions
-    let intervalId;
-    let timerStart;
-        
     //tracking the last song played for ease of access
     let lastSong;
     
@@ -48,17 +43,17 @@ $(document).ready(function() {
         }
     }
 
+    // making sure the music volume isn't too loud
+    function volume(track) {
+        document.getElementById(track).volume = .05;
+    };
+
     //color control
     function mainColor(screen){
         $('.main').removeClass('choiceColor BesaidColor LucaColor DjoseColor ThunderPlainsColor GagazetColor SinColor');
         $('.main').addClass(screen+'Color');
     }
 
-    // making sure the music volume isn't too loud
-    function volume(track) {
-        document.getElementById(track).volume = .05;
-    };
-    
     //change the background based on level
     function backdrop(location){
         $('.background').attr('src', 'images/'+location+'.png')
@@ -77,7 +72,10 @@ $(document).ready(function() {
     function difficultyChoice(){
         //clear main and remove timer div
         $(".main").empty();
-        $(".timer").remove();
+        $('.main').removeClass('fightSinColor')
+
+        musicPlayer('playerLost', 'off')
+        musicPlayer('playerWon', 'off')
         mainColor('choice')
 
         //this allows for replayability by only reseting boss when difficulty is called
@@ -253,6 +251,10 @@ $(document).ready(function() {
         runTimer(difficulty);
     };
 
+    //a global timer for the questions
+    let intervalId;
+    let timerStart;
+
     //a simple timer for each question
     function runTimer(difficulty) {
         timerStart = 20;
@@ -335,7 +337,6 @@ $(document).ready(function() {
 
     //on click of an answer option
     $('body').on('click', '.answer-choice', function(){
-        console.log('on click of answer ' + BesaidScore)
         //stop the tiemer and update the question trcker
         stop();
         questionTracker++;
@@ -515,32 +516,37 @@ $(document).ready(function() {
 
     //end of level screen
     function endLevelscreen(level, score){
-        console.log(level)
-        console.log(score)
 
         $('.main').empty()
 
         let percent;
         if(score == 0){
             percent='0% uvv...';
-        } else if(score == 1){
+        } 
+        else if(score == 1){
             percent='20% dno ryntan.';
-        } else if(score == 2){
+        } 
+        else if(score == 2){
             percent='40% hud pyt.';
-        } else if(score == 3){
+        } 
+        else if(score == 3){
             percent='60% kuut zup.';
-        } else if(score == 4){
+        } 
+        else if(score == 4){
             percent='80% knayd!';
-        } else if(score == 5){
+        } 
+        else if(score == 5){
             percent='100% yfacusa!!';
         }
         
         const header = $('<h3 class="endLevel-header">');
         if(level !== "ThunderPlains"){
             header.text(level);
-        } else {
+        } 
+        else {
             header.text('Thunder Plains');
         }
+        
         const subHeader = $('<h4 class="endLevel-subHeader">');
         subHeader.text('You scored a ' + percent);
         const secret = $('<p class="endLevel-secret">');
@@ -548,16 +554,24 @@ $(document).ready(function() {
         const retry = $('<button class="retryBtn">');
         if(score !== 5){
             retry.text('Try again?')
-        } else if(score == 5){
+        } 
+        else if(score == 5){
             retry.text('Play again!')
         }
+        
         $('.main').append(header).append(subHeader).append(secret).append(retry)
 
         $('body').on('click', '.retryBtn', difficultyChoice)
     }
+    
     //creating the lose screen for the player
     function endgameScreen(condition){
-        $(".timer").remove()
+        BesaidCount=0;
+        LucaCount=0;
+        DjoseCount=0;
+        ThunderPlainsCount=0;
+        GagazetCount = 0;
+        
         $(".main").empty();
         musicPlayer('Sin', 'off')
         if(condition == 'lost'){
@@ -581,6 +595,7 @@ $(document).ready(function() {
             retry.text('Play again!')
             $('.main').append(retry);
         }
-        // $('body').on('click', '.retryBtn', difficultyChoice)
+
+        $('body').on('click', '.retryBtn', difficultyChoice)
     };
 });
