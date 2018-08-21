@@ -13,7 +13,7 @@
 }
 /* I made an api call to the youtube player api to bypass chrome stopping autoplay on music and movies
 so I have to hide the video behind the background image until i destroy it on game start */
-.player, .video{
+.player, .video, .endScene{
     z-index: 1;
     position: fixed;
     top: 0;

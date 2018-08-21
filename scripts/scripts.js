@@ -65,6 +65,7 @@ $(document).ready(function() {
         $('#player').remove();
         difficultyChoice();
         document.getElementById('video').addEventListener('ended', cutsceneEnded, false)
+        document.getElementById('endScene').addEventListener('ended', winSceneEnded, false)
     })
     
     //difficulty selection screen
@@ -571,9 +572,9 @@ $(document).ready(function() {
         DjoseCount=0;
         ThunderPlainsCount=0;
         GagazetCount = 0;
-        
+
         $(".main").empty();
-        musicPlayer('Sin', 'off')
+        musicPlayer('Sin', 'off');
         if(condition == 'lost'){
             musicPlayer('playerLost', 'on')
             backdrop('loseScreen')
@@ -585,17 +586,23 @@ $(document).ready(function() {
             $('.main').append(retry);
         }
         if(condition == 'won'){
-            musicPlayer('playerWon', 'on')
-            backdrop('loseScreen')
-            // document.getElementById('victoryVid').play();
-            let youWin = $("<div class='player-wins'>")
-            $(".main").append(youWin);
-            $(".player-wins").text('YOU WON!');
-            const retry = $('<button class="retryBtn">');
-            retry.text('Play again!')
-            $('.main').append(retry);
+            $('#endScene').addClass('cutscene');
+            document.getElementById("endScene").play();
+
         }
 
         $('body').on('click', '.retryBtn', difficultyChoice)
     };
+
+    function winSceneEnded(){
+        musicPlayer('playerWon', 'on');
+        backdrop('victoryScreen');
+        $('#endScene').removeClass('cutscene');
+        let youWin = $("<div class='player-wins'>");
+        $(".main").append(youWin);
+        $(".player-wins").text('YOU WON!');
+        const retry = $('<button class="retryBtn">');
+        retry.text('Play again!')
+        $('.main').append(retry);
+    }
 });
