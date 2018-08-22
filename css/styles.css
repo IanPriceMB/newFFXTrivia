@@ -85,148 +85,304 @@ body{
 }
 /* --------------------------------------------------- */
 /* setting up the sizing and flexness of the main div */
-.main{
-    padding: 20px;
-    border-radius: 20px;
-    opacity: .7;
-    border: 1px solid black;
-    min-height: 1px;
-    max-height: 70vh;
-    min-width: 30vw;
-    max-width: 40vw;
-    z-index: 3;
+@media only screen and (min-width: 768px){
+    .main{
+        padding: 20px;
+        border-radius: 20px;
+        opacity: .7;
+        border: 1px solid black;
+        min-height: 1px;
+        max-height: 70vh;
+        min-width: 30vw;
+        max-width: 40vw;
+        z-index: 3;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+    }
+    /* ensureing the title itmes are centered */
+    .main-title, .main-subtitle, .main-startBtn{
+        align-self: center;
+        text-align: center;
+    }
+    /* additional style for the main screen */
+    .main-title{
+        font-size: 3em;
+        margin: 0;
+    }
+    .main-subtitle{
+        font-size: 2em;
+    }
+    .main-startBtn{
+        background-color: black;
+        color: white;
+        box-sizing: border-box;
+        width: 80%;
+        border-radius: 20px;
+        border: solid white;
+        font-size: 3em;
+        cursor: pointer;
+    }
+    .main-startBtn > h2 {
+        margin: 10px;
+    }
+    
+    /* ------------------------------------------------------- */
+    /* ensureing the difficulty selection screen is centered */
+    .difficultyBtn{
+        align-self: center;
+        box-sizing: border-box;
+        width: 95%;
+        background-color: black;
+        border: solid white;
+        cursor: pointer;
+    }
+    .difficultyBtn{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    /* 5 difficulty levels so i get rid of the extra margin to not sprad the box */
+    .difficultyBtn:nth-of-type(5){
+        margin-bottom: 0;
+    }
+    .difficultyBtn >  h2, .difficultyBtn > p {
+        align-self: center;
+        color: white;
+        opacity: 1;
+        margin: 0;
+        text-align: center;
+    }
+    .difficultyBtn >  h2{
+        font-size: 2em;
+    }
+    .difficultyBtn > p{
+        font-size: 1em;
+    }
+    
+    /* ------------------------------------------------------ */
+    /* ensureing the question and answer section is centered */
+    .timer, .question {
+        align-self: center;
+        text-align: center;
+    }
+    row{ 
+        display: flex;
+        cursor: pointer;
+    }
+    .answer, .answerNumber{
+        box-sizing: content-box;
+        font-size: 1.5em;
+        height: 3em;
+    }
+    .answerNumber{
+        width: 10%;
+    }
+    .answer{
+        width: 90%;
+    }
+    .timer, .question{
+        font-size: 2em;
+    }
+    .timer > h3{
+        margin: 0;
+    }
+    
+    /* -------------------------------------------------------------------- */
+    /* end level screen */
+    .endLevel-header, .endLevel-subHeader, .endLevel-secret{
+        align-self: center;
+        text-align: center;
+        margin: 0;
+    }
+    .endLevel-header{
+        font-size: 4em;
+    }
+    .endLevel-subHeader{
+        font-size: 3em;
+    }
+    .endLevel-secret{
+        font-size: 1.5em;
+    }
+    
+    /* ------------------------------------------------------------------------ */
+    /* sin has been sighted */
+    .sin-text{
+        align-self: center;
+        text-align: center;
+        font-size: 3em;
+    }
+    
+    .sin-startBtn, .retryBtn{
+        background-color: black;
+        color: white;
+        box-sizing: border-box;
+        width: 80%;
+        border-radius: 20px;
+        border: solid white;
+        font-size: 3em;
+        align-self: center;
+        cursor: pointer;
+    }
+    
+    /* win and lose screen style */
+    .player-wins, .player-lost{
+        align-self: center;
+        text-align: center;
+        font-size: 3em;
+    }
 }
-.main{
-    display: flex;
-    flex-direction: column;
-}
-/* ensureing the title itmes are centered */
-.main-title, .main-subtitle, .main-startBtn{
-    align-self: center;
-    text-align: center;
-}
-/* additional style for the main screen */
-.main-title{
-    font-size: 3em;
-    margin: 0;
-}
-.main-subtitle{
-    font-size: 2em;
-}
-.main-startBtn{
-    background-color: black;
-    color: white;
-    box-sizing: border-box;
-    width: 80%;
-    border-radius: 20px;
-    border: solid white;
-    font-size: 3em;
-    cursor: pointer;
-}
-.main-startBtn > h2 {
-    margin: 10px;
-}
-
-/* ------------------------------------------------------- */
-/* ensureing the difficulty selection screen is centered */
-.difficultyBtn{
-    align-self: center;
-    box-sizing: border-box;
-    width: 95%;
-    background-color: black;
-    border: solid white;
-    cursor: pointer;
-}
-.difficultyBtn{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-}
-/* 5 difficulty levels so i get rid of the extra margin to not sprad the box */
-.difficultyBtn:nth-of-type(5){
-    margin-bottom: 0;
-}
-.difficultyBtn >  h2, .difficultyBtn > p {
-    align-self: center;
-    color: white;
-    opacity: 1;
-    margin: 0;
-}
-.difficultyBtn >  h2{
-    font-size: 2em;
-}
-.difficultyBtn > p{
-    font-size: 1em;
-}
-
-/* ------------------------------------------------------ */
-/* ensureing the question and answer section is centered */
-.timer, .question {
-    align-self: center;
-    text-align: center;
-}
-row{ 
-    display: flex;
-    cursor: pointer;
-}
-.answer, .answerNumber{
-    box-sizing: content-box;
-    font-size: 1.5em;
-    height: 3em;
-}
-.answerNumber{
-    width: 10%;
-}
-.answer{
-    width: 90%;
-}
-.timer, .question{
-    font-size: 2em;
-}
-.timer > h3{
-    margin: 0;
-}
-
-/* -------------------------------------------------------------------- */
-/* end level screen */
-.endLevel-header, .endLevel-subHeader, .endLevel-secret{
-    align-self: center;
-    text-align: center;
-    margin: 0;
-}
-.endLevel-header{
-    font-size: 4em;
-}
-.endLevel-subHeader{
-    font-size: 3em;
-}
-.endLevel-secret{
-    font-size: 1.5em;
-}
-
-/* ------------------------------------------------------------------------ */
-/* sin has been sighted */
-.sin-text{
-    align-self: center;
-    text-align: center;
-    font-size: 3em;
-}
-
-.sin-startBtn, .retryBtn{
-    background-color: black;
-    color: white;
-    box-sizing: border-box;
-    width: 80%;
-    border-radius: 20px;
-    border: solid white;
-    font-size: 3em;
-    align-self: center;
-    cursor: pointer;
-}
-
-/* win and lose screen style */
-.player-wins, .player-lost{
-    align-self: center;
-    text-align: center;
-    font-size: 3em;
+@media only screen and (max-width: 768px){
+    .main{
+        padding: 20px;
+        border-radius: 20px;
+        opacity: .7;
+        border: 1px solid black;
+        min-height: 1px;
+        max-height: 95vh;
+        min-width: 30vw;
+        max-width: 95vw;
+        z-index: 3;
+        overflow: auto;
+    }
+    .main::-webkit-scrollbar { 
+        display: none; 
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+    }
+    /* ensureing the title itmes are centered */
+    .main-title, .main-subtitle, .main-startBtn{
+        align-self: center;
+        text-align: center;
+    }
+    /* additional style for the main screen */
+    .main-title{
+        font-size: 3em;
+        margin: 0;
+    }
+    .main-subtitle{
+        font-size: 2em;
+    }
+    .main-startBtn{
+        background-color: black;
+        color: white;
+        box-sizing: border-box;
+        width: 80%;
+        border-radius: 20px;
+        border: solid white;
+        font-size: 3em;
+        cursor: pointer;
+    }
+    .main-startBtn > h2 {
+        margin: 10px;
+    }
+    
+    /* ------------------------------------------------------- */
+    /* ensureing the difficulty selection screen is centered */
+    .difficultyBtn{
+        align-self: center;
+        box-sizing: border-box;
+        width: 95%;
+        background-color: black;
+        border: solid white;
+        cursor: pointer;
+    }
+    .difficultyBtn{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    /* 5 difficulty levels so i get rid of the extra margin to not sprad the box */
+    .difficultyBtn:nth-of-type(5){
+        margin-bottom: 0;
+    }
+    .difficultyBtn >  h2, .difficultyBtn > p {
+        align-self: center;
+        color: white;
+        opacity: 1;
+        margin: 0;
+        text-align: center;
+    }
+    .difficultyBtn >  h2{
+        font-size: 2em;
+    }
+    .difficultyBtn > p{
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+    
+    /* ------------------------------------------------------ */
+    /* ensureing the question and answer section is centered */
+    .timer, .question {
+        align-self: center;
+        text-align: center;
+    }
+    row{ 
+        display: flex;
+        cursor: pointer;
+    }
+    .answer, .answerNumber{
+        box-sizing: content-box;
+        font-size: 1.5em;
+        height: 3em;
+    }
+    .answerNumber{
+        width: 10%;
+    }
+    .answer{
+        width: 90%;
+    }
+    .timer, .question{
+        font-size: 2em;
+    }
+    .timer > h3{
+        margin: 0;
+    }
+    
+    /* -------------------------------------------------------------------- */
+    /* end level screen */
+    .endLevel-header, .endLevel-subHeader, .endLevel-secret{
+        align-self: center;
+        text-align: center;
+        margin: 0;
+    }
+    .endLevel-header{
+        font-size: 4em;
+    }
+    .endLevel-subHeader{
+        font-size: 3em;
+    }
+    .endLevel-secret{
+        font-size: 1.5em;
+    }
+    
+    /* ------------------------------------------------------------------------ */
+    /* sin has been sighted */
+    .sin-text{
+        align-self: center;
+        text-align: center;
+        font-size: 3em;
+    }
+    
+    .sin-startBtn, .retryBtn{
+        background-color: black;
+        color: white;
+        box-sizing: border-box;
+        width: 80%;
+        border-radius: 20px;
+        border: solid white;
+        font-size: 3em;
+        align-self: center;
+        cursor: pointer;
+    }
+    
+    /* win and lose screen style */
+    .player-wins, .player-lost{
+        align-self: center;
+        text-align: center;
+        font-size: 3em;
+    }
 }

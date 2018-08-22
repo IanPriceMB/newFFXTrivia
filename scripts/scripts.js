@@ -522,22 +522,22 @@ $(document).ready(function() {
 
         let percent;
         if(score == 0){
-            percent='0% uvv...';
+            percent='0% Uvv...';
         } 
         else if(score == 1){
-            percent='20% dno ryntan.';
+            percent='20% Dno ryntan.';
         } 
         else if(score == 2){
-            percent='40% hud pyt.';
+            percent='40% Hud pyt.';
         } 
         else if(score == 3){
-            percent='60% kuut zup.';
+            percent='60% Kuut zup.';
         } 
         else if(score == 4){
-            percent='80% knayd!';
+            percent='80% Knayd!';
         } 
         else if(score == 5){
-            percent='100% yfacusa!!';
+            percent='100% Yfacusa!!';
         }
         
         const header = $('<h3 class="endLevel-header">');
