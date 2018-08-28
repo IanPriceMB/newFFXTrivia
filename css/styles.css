@@ -161,6 +161,37 @@ body{
         font-size: 1em;
     }
     
+    .hidden{
+        align-self: center;
+        box-sizing: border-box;
+        width: 95%;
+        background-color: black;
+        border: solid white;
+        cursor: pointer;
+    }
+    .hidden{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    /* 5 difficulty levels so i get rid of the extra margin to not sprad the box */
+    .hidden:nth-of-type(5){
+        margin-bottom: 0;
+    }
+    .hidden >  h2, .hidden > p {
+        align-self: center;
+        color: white;
+        opacity: 1;
+        margin: 0;
+        text-align: center;
+    }
+    .hidden >  h2{
+        font-size: 2em;
+    }
+    .hidden > p{
+        font-size: 1em;
+    }
+    
     /* ------------------------------------------------------ */
     /* ensureing the question and answer section is centered */
     .timer, .question {
@@ -314,6 +345,37 @@ body{
         margin-bottom: 5px;
     }
     
+    .hidden{
+        align-self: center;
+        box-sizing: border-box;
+        width: 95%;
+        background-color: black;
+        border: solid white;
+        cursor: pointer;
+    }
+    .hidden{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    /* 5 difficulty levels so i get rid of the extra margin to not sprad the box */
+    .hidden:nth-of-type(5){
+        margin-bottom: 0;
+    }
+    .hidden >  h2, .hidden > p {
+        align-self: center;
+        color: white;
+        opacity: 1;
+        margin: 0;
+        text-align: center;
+    }
+    .hidden >  h2{
+        font-size: 2em;
+    }
+    .hidden > p{
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
     /* ------------------------------------------------------ */
     /* ensureing the question and answer section is centered */
     .timer, .question {

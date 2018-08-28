@@ -56,7 +56,8 @@ $(document).ready(function() {
 
     //change the background based on level
     function backdrop(location){
-        $('.background').attr('src', 'images/'+location+'.png')
+       var background = $('.background').attr('src', 'images/'+location+'.png');
+       background.onload = function() {console.log('loaded')}
     }
 
     //start the game on click
